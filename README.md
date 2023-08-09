@@ -6,6 +6,6 @@ REST API для аутентификации пользователей и со�
 
 IP 158.160.19.230
 
-https://api.moviesexplorer.jezeld.nomoredomains.xyz
+https://api.moviesexplorer.jezeld.nomoredomains.co
 
 
