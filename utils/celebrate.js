@@ -1,7 +1,6 @@
-/* eslint-disable no-useless-escape */
 const { celebrate, Joi } = require('celebrate');
 
-const regex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
+const regex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
 
 const valUpdateUser = celebrate({
   body: Joi.object().keys({
@@ -12,7 +11,7 @@ const valUpdateUser = celebrate({
 
 const valCreateMovie = celebrate({
   body: Joi.object().keys({
-    id: Joi.number().required(),
+    movieId: Joi.number().required(),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
     director: Joi.string().required(),
@@ -34,7 +33,7 @@ const valDeleteMovie = celebrate({
 
 const valCreateUser = celebrate({
   body: Joi.object().keys({
-    name: Joi.string().min(2).max(30),
+    name: Joi.string().min(2).max(30).required(),
     email: Joi.string().email().required(),
     password: Joi.string().required(),
   }),

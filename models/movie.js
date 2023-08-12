@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 
 const movieSchema = new mongoose.Schema({
-  id: {
+  movieId: {
     type: Number,
     required: true,
   },
@@ -63,26 +63,6 @@ const movieSchema = new mongoose.Schema({
       message: 'Используйте корректную ссылку',
     },
   },
-  // createdAt: {
-  //   type: Date,
-  //   default: Date.now,
-  // },
-  // image: {
-  //   width: {
-  //     type: Number,
-  //     required: true,
-  //   },
-  //   thumbnail: {
-  //     url: {
-  //       type: String,
-  //       required: true,
-  //       validate: {
-  //         validator: (v) => validator.isURL(v),
-  //         message: 'Используйте корректную ссылку',
-  //       },
-  //     },
-  //   },
-  // },
 });
 
 module.exports = mongoose.model('movie', movieSchema);

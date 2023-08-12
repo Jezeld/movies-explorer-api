@@ -7,6 +7,7 @@ const {
   valCreateUser,
   valLogin,
 } = require('../utils/celebrate');
+const NotFoundError = require('../errors/notfound');
 
 // router.get('/crash-test', () => {
 //   setTimeout(() => {
@@ -19,5 +20,9 @@ router.post('/signin', valLogin, login);
 router.use(auth);
 router.use('/users', require('./users'));
 router.use('/movies', require('./movies'));
+
+router.use('*', (reg, res, next) => {
+  next(new NotFoundError('Запрашиваемый ресурс не найден'));
+});
 
 module.exports = router;

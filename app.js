@@ -7,7 +7,6 @@ const { SERVER_PORT, DB } = require('./utils/config');
 const limiter = require('./middlewares/rateLimiter');
 const errorProcessor = require('./middlewares/errorprocessor');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const NotFoundError = require('./errors/notfound');
 
 const app = express();
 app.use(helmet());
@@ -24,14 +23,11 @@ mongoose
 app.use(cors());
 
 app.use(express.json());
-app.use(limiter);
+
 app.use(requestLogger); // подключаем логгер запросов
+app.use(limiter);
 
 app.use(require('./routes/index'));
-
-app.use('*', (reg, res, next) => {
-  next(new NotFoundError('Запрашиваемый ресурс не найден'));
-});
 
 app.use(errorLogger); // подключаем логгер ошибок
 

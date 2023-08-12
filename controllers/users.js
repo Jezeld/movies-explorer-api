@@ -39,13 +39,21 @@ const getUserInfo = (req, res, next) => {
 const updateUserInfo = (req, res, next) => {
   const { name, email } = req.body;
   User.findByIdAndUpdate(req.user._id, { name, email }, { new: true, runValidators: true })
-    .then((user) => res.status(200).send(user))
+    // .then((user) => res.status(200).send(user))
+    .then((user) => {
+      if (!user) {
+        throw new NotFoundError('Пользователь не найден');
+      }
+      res.status(200).json(user);
+    })
     .catch((err) => {
       if (err instanceof mongoose.Error.ValidationError) {
         next(new BadRequestError('Переданные данные некорректны'));
-      } else {
-        next(err);
+      } if (err.code === 11000) {
+        next(new ConflictError('Данный email принадлежит другому пользователю'));
+        return;
       }
+      next(err);
     });
 };
 
