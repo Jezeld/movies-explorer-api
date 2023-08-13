@@ -8,6 +8,7 @@ const {
   valLogin,
 } = require('../utils/celebrate');
 const NotFoundError = require('../errors/notfound');
+const { NOT_FOUND } = require('../utils/constants');
 
 // router.get('/crash-test', () => {
 //   setTimeout(() => {
@@ -22,7 +23,7 @@ router.use('/users', require('./users'));
 router.use('/movies', require('./movies'));
 
 router.use('*', (reg, res, next) => {
-  next(new NotFoundError('Запрашиваемый ресурс не найден'));
+  next(new NotFoundError(NOT_FOUND));
 });
 
 module.exports = router;

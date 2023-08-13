@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const { VALIDATION_URL_ERROR } = require('../utils/constants');
 
 const movieSchema = new mongoose.Schema({
   movieId: {
@@ -39,7 +40,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: (v) => validator.isURL(v),
-      message: 'Используйте корректную ссылку',
+      message: VALIDATION_URL_ERROR,
     },
   },
   owner: {
@@ -52,7 +53,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: (v) => validator.isURL(v),
-      message: 'Используйте корректную ссылку',
+      message: VALIDATION_URL_ERROR,
     },
   },
   thumbnail: {
@@ -60,7 +61,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: (v) => validator.isURL(v),
-      message: 'Используйте корректную ссылку',
+      message: VALIDATION_URL_ERROR,
     },
   },
 });
