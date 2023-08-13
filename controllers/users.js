@@ -11,7 +11,6 @@ const {
   DUPLICATED_USER_ERROR,
   LOGIN_ERROR,
   NOT_FOUND_USER_ERROR,
-  BAD_REQUEST_USER_ERROR,
   BAD_REQUEST_ERROR,
   ERROR_CODE_UNIQUE,
   STATUS_OK_201,
@@ -29,7 +28,7 @@ const createUser = (req, res, next) => {
     .then((user) => res.status(STATUS_OK_201).send(user))
     .catch((err) => {
       if (err instanceof mongoose.Error.ValidationError) {
-        next(new BadRequestError(BAD_REQUEST_USER_ERROR));
+        next(new BadRequestError(BAD_REQUEST_ERROR));
         return;
       } if (err.code === ERROR_CODE_UNIQUE) {
         next(new ConflictError(DUPLICATED_USER_ERROR));

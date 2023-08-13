@@ -7,7 +7,7 @@ const {
   NOT_FOUND_ID_ERROR,
   FORBIDDEN_ERROR,
   STATUS_OK,
-  VALIDATION_ERROR,
+  BAD_REQUEST_ERROR,
   STATUS_OK_201,
 } = require('../utils/constants');
 
@@ -21,7 +21,7 @@ const createMovie = (req, res, next) => {
     })
     .catch((err) => {
       if (err instanceof mongoose.Error.ValidationError) {
-        next(new BadRequestError(VALIDATION_ERROR));
+        next(new BadRequestError(BAD_REQUEST_ERROR));
       } else {
         next(err);
       }
